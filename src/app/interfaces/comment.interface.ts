@@ -3,5 +3,5 @@ export interface Comment {
   user: string;
   content: string;
   attached: string;
-  time:Date
+  time: Date;
 }
