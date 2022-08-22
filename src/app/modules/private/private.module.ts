@@ -8,6 +8,8 @@ import { SharedModule } from '../shared/shared.module';
 import { VideoReviewerComponent } from './components/video-reviewer/video-reviewer.component';
 import { PrivateRoutingModule } from './private-routing.module';
 import { CommentsViewerComponent } from './components/comments-viewer/comments-viewer.component';
+import { CanvasDrawComponent } from './components/canvas-draw/canvas-draw.component';
+import { VideoControlsComponent } from './components/video-controls/video-controls.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { CommentsViewerComponent } from './components/comments-viewer/comments-v
     PrivateFooterComponent,
     VideoReviewerComponent,
     CommentsViewerComponent,
+    CanvasDrawComponent,
+    VideoControlsComponent,
   ],
   imports: [CommonModule, PrivateRoutingModule, SharedModule],
 })

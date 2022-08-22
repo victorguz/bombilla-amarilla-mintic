@@ -7,6 +7,7 @@ import {
   getLocaleMonthNames,
 } from '@angular/common';
 import { Base64File } from '../../interfaces/shared.interfaces';
+import html2canvas from 'html2canvas';
 
 ///////////////Funciones globales
 
@@ -276,4 +277,27 @@ export async function base64ToFile(loadedFile: Base64File | string) {
     });
   }
   return null;
+}
+
+export function createImageFromHTML(
+  element: HTMLElement
+): Promise<HTMLCanvasElement> {
+  return html2canvas(element);
+}
+
+export function secondsToHourFormat(sec_num: number) {
+  let hours: any = Math.floor(sec_num / 3600);
+  let minutes: any = Math.floor((sec_num - hours * 3600) / 60);
+  let seconds: any = sec_num - hours * 3600 - minutes * 60;
+
+  if (hours < 10) {
+    hours = '0' + hours;
+  }
+  if (minutes < 10) {
+    minutes = '0' + minutes;
+  }
+  if (seconds < 10) {
+    seconds = '0' + seconds;
+  }
+  return hours + ':' + minutes + ':' + seconds;
 }

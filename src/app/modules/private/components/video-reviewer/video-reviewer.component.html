@@ -1,29 +1,44 @@
-<div class="pt-3 pb-3 position-relative w-100 h-100 bg-dark" style="z-index: 1">
-  <div class="row">
-    <div class="col-8">
+<div class="container-fluid">
+  <div class="row h-100">
+    <div class="col-9">
       <video
         #videoRef
         src="assets/camilo-por-primera-vez.mp4"
         width="100%"
-        controls="true"
+        [controls]="false"
+        title="Video"
       ></video>
 
-      <div class="d-flex">
-        <button mat-icon-button class="bg-primary" (click)="takeVideoFrame()">
+      <div class="video-controls" *ngIf="isLoadedVideo()">
+        <app-video-controls [video]="video"></app-video-controls>
+        <div>
+          <span>
+            {{ video.currentTime ? video.currentTime : "00:00:00:00" }}
+          </span>
+          <span class="text-muted">
+            {{ video.duration ? video.duration : "00:00:00:00" }}</span
+          >
+        </div>
+        <button
+          mat-icon-button
+          matTooltip="Reproduce el video"
+          matTooltipPosition="right"
+          matTooltipHideDelay="500"
+          matTooltipClass="background-tooltip"
+          class="text-light"
+          (click)="takeVideoFrame()"
+        >
           <mat-icon>edit</mat-icon>
         </button>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-3">
       <app-comments-viewer></app-comments-viewer>
     </div>
   </div>
 
-  <div class="container-fluid">
-    <div
-      class="image-container centered bg-black opacity-25 w-100 h-100 d-none align-items-start justify-content-end"
-      style="z-index: 2"
-    >
+  <div class="contenedor-flotante">
+    <div class="image-container" style="z-index: 2">
       <button
         mat-icon-button
         class="bg-white m-4"
@@ -34,8 +49,13 @@
     </div>
 
     <div
-      class="draw-container centered d-none align-items-center justify-content-center"
-      style="z-index: 3; pointer-events: none; width: 90%"
+      class="draw-container"
+      style="
+        z-index: 3;
+        pointer-events: none;
+        width: 90%;
+        max-height: 90vh !important;
+      "
     >
       <img
         alt="taken-image"
@@ -44,17 +64,13 @@
         #image
       />
 
-      <section class="drawer centered" style="z-index: 4; pointer-events: all">
-        <canvas
-          id="canvasId"
-          #canvasRef
-          style="pointer-events: all"
+      <!-- <section class="drawer centered" style="z-index: 4; pointer-events: all">
+        <app-canvas-draw
           [width]="image.width"
           [height]="image.height"
-          (mousedown)="mouseDown()"
-          (mouseup)="mouseUp()"
-        ></canvas>
-      </section>
+          [resetOnChange]="resetOnChange"
+        ></app-canvas-draw>
+      </section> -->
     </div>
   </div>
 </div>

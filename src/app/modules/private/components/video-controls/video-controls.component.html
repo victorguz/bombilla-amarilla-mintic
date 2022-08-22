@@ -1,0 +1,55 @@
+<div class="d-flex align-items-center gap-1">
+  <button
+    mat-icon-button
+    class="text-light"
+    matTooltip="Reproduce el video"
+    matTooltipPosition="right"
+    matTooltipHideDelay="500"
+    matTooltipClass="background-tooltip"
+    (click)="video && video.paused ? video.play() : video.pause()"
+  >
+    <mat-icon>{{ video && video.paused ? "play_arrow" : "" }}</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="text-light"
+    matTooltip="Reproduce el video"
+    matTooltipPosition="right"
+    matTooltipHideDelay="500"
+    matTooltipClass="background-tooltip"
+  >
+    <mat-icon>skip_previous</mat-icon>
+  </button>
+
+  <button
+    mat-icon-button
+    class="text-light"
+    matTooltip="Reproduce el video"
+    matTooltipPosition="right"
+    matTooltipHideDelay="500"
+    matTooltipClass="background-tooltip"
+  >
+    <mat-icon>fast_rewind</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="text-light"
+    matTooltip="Reproduce el video"
+    matTooltipPosition="right"
+    matTooltipHideDelay="500"
+    matTooltipClass="background-tooltip"
+  >
+    <mat-icon>fast_forward</mat-icon>
+  </button>
+
+  <button
+    mat-icon-button
+    class="text-light"
+    matTooltip="Reproduce el video"
+    matTooltipPosition="right"
+    matTooltipHideDelay="500"
+    matTooltipClass="background-tooltip"
+  >
+    <mat-icon>skip_next</mat-icon>
+  </button>
+</div>
