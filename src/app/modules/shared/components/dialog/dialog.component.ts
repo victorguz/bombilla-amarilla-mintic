@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ModalServiceOption, ModalServiceType } from '../../interfaces/shared.interfaces';
+import { ModalServiceOption, ModalServiceType } from '../../../../interfaces/shared.interfaces';
 
 @Component({
   selector: 'aurora-helper-dialog',

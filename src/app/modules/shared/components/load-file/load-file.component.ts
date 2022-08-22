@@ -9,7 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { LIMITE_CARGA } from '../../../core/constants.config';
 import { base64ToFile } from '../../../core/services/functions.service';
 import { ModalService } from '../../../core/services/modal.service';
-import { Base64File } from '../../interfaces/shared.interfaces';
+import { Base64File } from '../../../../interfaces/shared.interfaces';
 
 @Component({
   selector: 'app-load-file',

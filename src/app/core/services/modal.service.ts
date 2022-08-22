@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { AuroraHelperDialogComponent } from '../../modules/shared/components/dialog/dialog.component';
-import { ModalServiceOption, ModalServiceType } from '../../modules/shared/interfaces/shared.interfaces';
+import { ModalServiceOption, ModalServiceType } from '../../interfaces/shared.interfaces';
 
 @Injectable({
   providedIn: 'root',

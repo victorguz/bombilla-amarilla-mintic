@@ -6,7 +6,7 @@ import {
   getLocaleDayNames,
   getLocaleMonthNames,
 } from '@angular/common';
-import { Base64File } from '../../modules/shared/interfaces/shared.interfaces';
+import { Base64File } from '../../interfaces/shared.interfaces';
 
 ///////////////Funciones globales
 

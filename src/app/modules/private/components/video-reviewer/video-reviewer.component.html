@@ -1,0 +1,60 @@
+<div class="pt-3 pb-3 position-relative w-100 h-100 bg-dark" style="z-index: 1">
+  <div class="row">
+    <div class="col-8">
+      <video
+        #videoRef
+        src="assets/camilo-por-primera-vez.mp4"
+        width="100%"
+        controls="true"
+      ></video>
+
+      <div class="d-flex">
+        <button mat-icon-button class="bg-primary" (click)="takeVideoFrame()">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="col-4">
+      <app-comments-viewer></app-comments-viewer>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div
+      class="image-container centered bg-black opacity-25 w-100 h-100 d-none align-items-start justify-content-end"
+      style="z-index: 2"
+    >
+      <button
+        mat-icon-button
+        class="bg-white m-4"
+        (click)="setVisibleFrame(false)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div
+      class="draw-container centered d-none align-items-center justify-content-center"
+      style="z-index: 3; pointer-events: none; width: 90%"
+    >
+      <img
+        alt="taken-image"
+        class="img-fluid taken-image"
+        width="100%"
+        #image
+      />
+
+      <section class="drawer centered" style="z-index: 4; pointer-events: all">
+        <canvas
+          id="canvasId"
+          #canvasRef
+          style="pointer-events: all"
+          [width]="image.width"
+          [height]="image.height"
+          (mousedown)="mouseDown()"
+          (mouseup)="mouseUp()"
+        ></canvas>
+      </section>
+    </div>
+  </div>
+</div>
