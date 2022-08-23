@@ -1,0 +1,115 @@
+<section class="section-progress" *ngIf="video != null">
+  <app-reproduction-time-line></app-reproduction-time-line>
+
+  <mat-slider
+    class="video-slider"
+    [ngClass]="{ noIniciado: currentTime ? false : true }"
+    [(ngModel)]="currentTimePercent"
+  ></mat-slider>
+</section>
+<div class="d-flex align-items-center justify-content-center text-center mb-2">
+  <span class="text-white" style="width: 120px">
+    {{ currentTime | secondsToHour: (video ? video.duration : undefined) }}
+  </span>
+  <span class="text-muted">/</span>
+  <span class="text-muted" style="width: 120px">
+    {{
+      (video ? video.duration : 0)
+        | secondsToHour: (video ? video.duration : undefined)
+    }}</span
+  >
+</div>
+<div class="video-controls border-top border-dark">
+  <div class="d-flex align-items-center">
+    <button
+      mat-icon-button
+      class="text-light"
+      matTooltip="Control de volumen"
+      matTooltipPosition="below"
+      matTooltipHideDelay="300"
+      matTooltipShowDelay="2000"
+      matTooltipClass="background-tooltip"
+      (click)="setMuted()"
+    >
+      <mat-icon>{{ isMuted ? "volume_mute" : "volume_up" }}</mat-icon>
+    </button>
+  </div>
+  <div class="d-flex align-items-center justify-content-center">
+    <button
+      mat-icon-button
+      class="text-light"
+      matTooltip="Reproduce el video"
+      matTooltipPosition="below"
+      matTooltipHideDelay="300"
+      matTooltipShowDelay="2000"
+      matTooltipClass="background-tooltip"
+    >
+      <mat-icon>skip_previous</mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      class="text-light"
+      matTooltip="Reproduce el video"
+      matTooltipPosition="below"
+      matTooltipHideDelay="300"
+      matTooltipShowDelay="2000"
+      matTooltipClass="background-tooltip"
+      (click)="fastForwardVideo(false)"
+    >
+      <mat-icon>fast_rewind</mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      class="text-light"
+      matTooltip="Reproduce el video"
+      matTooltipPosition="below"
+      matTooltipHideDelay="300"
+      matTooltipShowDelay="2000"
+      matTooltipClass="background-tooltip"
+      (click)="playVideo(null)"
+    >
+      <mat-icon>{{ isPaused ? "play_circle" : "pause_circle" }}</mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      class="text-light"
+      matTooltip="Reproduce el video"
+      matTooltipPosition="below"
+      matTooltipHideDelay="300"
+      matTooltipShowDelay="2000"
+      matTooltipClass="background-tooltip"
+      (click)="fastForwardVideo(true)"
+    >
+      <mat-icon>fast_forward</mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      class="text-light"
+      matTooltip="Reproduce el video"
+      matTooltipPosition="below"
+      matTooltipHideDelay="300"
+      matTooltipShowDelay="2000"
+      matTooltipClass="background-tooltip"
+    >
+      <mat-icon>skip_next</mat-icon>
+    </button>
+  </div>
+  <div class="d-flex align-items-center justify-content-end">
+    <button
+      mat-icon-button
+      class="text-light"
+      matTooltip="Realizar un dibujo"
+      matTooltipPosition="below"
+      matTooltipHideDelay="300"
+      matTooltipShowDelay="2000"
+      matTooltipClass="background-tooltip"
+      (click)="clickDraw.emit(true)"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+</div>

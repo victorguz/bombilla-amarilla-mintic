@@ -1,0 +1,46 @@
+<div class="review-container">
+  <div class="video-container">
+    <video
+      #videoRef
+      src="assets/camilo-por-primera-vez.mp4"
+      [controls]="false"
+      class="video img-fluid"
+    ></video>
+    <app-video-controls
+      class="controls"
+      (clickDraw)="takeVideoFrame()"
+    ></app-video-controls>
+  </div>
+  <div class="comentarios">
+    <app-comments-viewer [currentImage]="currentImage"></app-comments-viewer>
+  </div>
+
+  <div class="contenedor-flotante row d-none">
+    <button
+      mat-icon-button
+      class="button-close bg-primary m-4 shadow"
+      (click)="setVisibleFrameVoid(false)"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="draw-container">
+      <div class="content">
+        <img
+          alt="taken-image"
+          class="img-fluid taken-image"
+          src="assets/imagen-ejemplo.png"
+          #image
+        />
+
+        <section class="drawer centered">
+          <app-canvas-draw
+            [width]="image.width"
+            [height]="image.height"
+            [resetOnChange]="resetOnChange"
+          ></app-canvas-draw>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
