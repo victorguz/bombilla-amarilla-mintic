@@ -17,6 +17,6 @@
 
 .video-controls {
   display: grid;
-  grid-template-columns: 33% 33% 33%;
+  grid-template-columns: auto auto auto;
   align-items: center;
 }

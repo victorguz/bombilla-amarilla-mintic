@@ -1,36 +1,31 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-9 p-0">
-      <video
-        #videoRef
-        src="assets/camilo-por-primera-vez.mp4"
-        width="100%"
-        [controls]="false"
-        title="Video"
-      ></video>
-
-      <app-video-controls
-        *ngIf="isLoadedVideo()"
-        [video]="video"
-        (clickDraw)="takeVideoFrame()"
-      ></app-video-controls>
-    </div>
-    <div class="col-3 p-0">
-      <app-comments-viewer></app-comments-viewer>
-    </div>
+<div class="review-container">
+  <div class="video-container">
+    <video
+      #videoRef
+      src="assets/camilo-por-primera-vez.mp4"
+      [controls]="false"
+      class="video img-fluid"
+    ></video>
+    <app-video-controls
+      class="controls"
+      (clickDraw)="takeVideoFrame()"
+    ></app-video-controls>
+  </div>
+  <div class="comentarios">
+    <app-comments-viewer></app-comments-viewer>
   </div>
 
-  <div class="contenedor-flotante row">
+  <div class="contenedor-flotante row d-none">
     <button
-      mat-icon-button
       cdkDrag
-      class="button-close bg-primary m-4"
-      (dblclick)="setVisibleFrame(false)"
+      mat-icon-button
+      class="button-close bg-primary m-4 shadow"
+      (dblclick)="setVisibleFrameVoid(false)"
     >
       <mat-icon>close</mat-icon>
     </button>
 
-    <div class="draw-container" style="">
+    <div class="draw-container">
       <img
         alt="taken-image"
         class="img-fluid taken-image"
@@ -38,13 +33,13 @@
         #image
       />
 
-      <!-- <section class="drawer centered" style="z-index: 4; pointer-events: all">
+      <section class="drawer centered">
         <app-canvas-draw
           [width]="image.width"
           [height]="image.height"
           [resetOnChange]="resetOnChange"
         ></app-canvas-draw>
-      </section> -->
+      </section>
     </div>
   </div>
 </div>

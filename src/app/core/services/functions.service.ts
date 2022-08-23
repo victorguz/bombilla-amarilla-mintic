@@ -8,6 +8,7 @@ import {
 } from '@angular/common';
 import { Base64File } from '../../interfaces/shared.interfaces';
 import html2canvas from 'html2canvas';
+import { secureStorage } from '../secure.config';
 
 ///////////////Funciones globales
 
@@ -53,7 +54,7 @@ export function getConfig(name: string) {
 }
 
 /**
- * Set the data on localStorage (sessionStorage)
+ * Set the data on secureStorage (secureStorage)
  * @param name item name
  * @param data item data
  */
@@ -61,27 +62,36 @@ export function setOnLocal(name: string, data: any) {
   if (!isNotEmpty(name)) {
     throw new Error('El nombre de la variable local no puede estar vacío');
   }
-  sessionStorage.setItem(name, data);
+  secureStorage.setItem(name, data);
 }
 /**
- * Deletes item from localStorage (sessionStorage)
+ * Deletes item from secureStorage (secureStorage)
  * @param name
  */
 export function removeFromLocal(name: string) {
   if (!isNotEmpty(name)) {
     throw new Error('El nombre de la variable local no puede estar vacío');
   }
-  sessionStorage.removeItem(name);
+  secureStorage.removeItem(name);
 }
 
 /**
- * Gets the localStorage (sessionStorage) string by name and parse it like JSON.
+ * Gets the secureStorage (secureStorage) string by name and parse it like JSON.
  * If it isn't an object, array or string, returns null.
  * @param name
  * @returns the object or array
  */
 export function getFromLocal(name: string): any {
-  return sessionStorage.getItem(name);
+  return secureStorage.getItem(name);
+}
+
+export function pushToLocalArray(name: string, value: any) {
+  let array: any[] = getFromLocal(name);
+  if (!array) {
+    array = [];
+  }
+  array.push(value);
+  setOnLocal(name, array);
 }
 
 export function getBasicError(error: any, print: boolean = false): any {
@@ -285,10 +295,9 @@ export function createImageFromHTML(
   return html2canvas(element);
 }
 
-export function secondsToHourFormat(
-  sec_num: number,
-  includeMilis: boolean = false
-) {
+export function secondsToHourFormat(sec_num: number, maxValue?: number) {
+  let result = '';
+  sec_num = sec_num ? sec_num : 0;
   let hours: any = Math.floor(sec_num / 3600);
   let minutes: any = Math.floor((sec_num - hours * 3600) / 60);
   let seconds: any = sec_num - hours * 3600 - minutes * 60;
@@ -297,14 +306,25 @@ export function secondsToHourFormat(
   const formatNumber = (n: number) => {
     return n < 10 ? '0' + n : n;
   };
-
-  return (
-    formatNumber(hours) +
-    ':' +
-    formatNumber(minutes) +
-    ':' +
-    formatNumber(Math.floor(seconds)) +
-    ':' +
-    formatNumber(miliseconds)
-  );
+  if (maxValue && maxValue > 1) {
+    result = '';
+    if (maxValue > 3600) {
+      result += formatNumber(hours) + ':';
+    }
+    if (maxValue > 60) {
+      result += formatNumber(minutes) + ':';
+    }
+    result +=
+      formatNumber(Math.floor(seconds)) + ':' + formatNumber(miliseconds);
+  } else {
+    result =
+      formatNumber(hours) +
+      ':' +
+      formatNumber(minutes) +
+      ':' +
+      formatNumber(Math.floor(seconds)) +
+      ':' +
+      formatNumber(miliseconds);
+  }
+  return result;
 }

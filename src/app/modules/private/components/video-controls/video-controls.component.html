@@ -1,4 +1,6 @@
-<section class="section-progress">
+<section class="section-progress" *ngIf="video != null">
+  <app-reproduction-time-line></app-reproduction-time-line>
+
   <mat-slider
     class="video-slider"
     [ngClass]="{ noIniciado: currentTime ? false : true }"
@@ -7,11 +9,14 @@
 </section>
 <div class="d-flex align-items-center justify-content-center text-center mb-2">
   <span class="text-white" style="width: 120px">
-    {{ currentTime | secondsToHour }}
+    {{ currentTime | secondsToHour: (video ? video.duration : undefined) }}
   </span>
   <span class="text-muted">/</span>
   <span class="text-muted" style="width: 120px">
-    {{ (video ? video.duration : 0) | secondsToHour }}</span
+    {{
+      (video ? video.duration : 0)
+        | secondsToHour: (video ? video.duration : undefined)
+    }}</span
   >
 </div>
 <div class="video-controls border-top border-dark">
@@ -20,15 +25,13 @@
       mat-icon-button
       class="text-light"
       matTooltip="Control de volumen"
-      matTooltipPosition="right"
+      matTooltipPosition="below"
       matTooltipHideDelay="300"
-      matTooltipShowDelay="1000"
+      matTooltipShowDelay="2000"
       matTooltipClass="background-tooltip"
-      (click)="video ? (video.muted = !video.muted) : ''"
+      (click)="setMuted()"
     >
-      <mat-icon>{{
-        video && video.muted ? "volume_mute" : "volume_up"
-      }}</mat-icon>
+      <mat-icon>{{ isMuted ? "volume_mute" : "volume_up" }}</mat-icon>
     </button>
   </div>
   <div class="d-flex align-items-center justify-content-center">
@@ -36,9 +39,9 @@
       mat-icon-button
       class="text-light"
       matTooltip="Reproduce el video"
-      matTooltipPosition="right"
+      matTooltipPosition="below"
       matTooltipHideDelay="300"
-      matTooltipShowDelay="1000"
+      matTooltipShowDelay="2000"
       matTooltipClass="background-tooltip"
     >
       <mat-icon>skip_previous</mat-icon>
@@ -48,10 +51,11 @@
       mat-icon-button
       class="text-light"
       matTooltip="Reproduce el video"
-      matTooltipPosition="right"
+      matTooltipPosition="below"
       matTooltipHideDelay="300"
-      matTooltipShowDelay="1000"
+      matTooltipShowDelay="2000"
       matTooltipClass="background-tooltip"
+      (mousedown)="fastForwardVideo(false)"
     >
       <mat-icon>fast_rewind</mat-icon>
     </button>
@@ -60,25 +64,24 @@
       mat-icon-button
       class="text-light"
       matTooltip="Reproduce el video"
-      matTooltipPosition="right"
+      matTooltipPosition="below"
       matTooltipHideDelay="300"
-      matTooltipShowDelay="1000"
+      matTooltipShowDelay="2000"
       matTooltipClass="background-tooltip"
-      (click)="video && video.paused ? video.play() : video.pause()"
+      (click)="playVideo(null)"
     >
-      <mat-icon>{{
-        video && video.paused ? "play_circle" : "pause_circle"
-      }}</mat-icon>
+      <mat-icon>{{ isPaused ? "play_circle" : "pause_circle" }}</mat-icon>
     </button>
 
     <button
       mat-icon-button
       class="text-light"
       matTooltip="Reproduce el video"
-      matTooltipPosition="right"
+      matTooltipPosition="below"
       matTooltipHideDelay="300"
-      matTooltipShowDelay="1000"
+      matTooltipShowDelay="2000"
       matTooltipClass="background-tooltip"
+      (mousedown)="fastForwardVideo(true)"
     >
       <mat-icon>fast_forward</mat-icon>
     </button>
@@ -87,9 +90,9 @@
       mat-icon-button
       class="text-light"
       matTooltip="Reproduce el video"
-      matTooltipPosition="right"
+      matTooltipPosition="below"
       matTooltipHideDelay="300"
-      matTooltipShowDelay="1000"
+      matTooltipShowDelay="2000"
       matTooltipClass="background-tooltip"
     >
       <mat-icon>skip_next</mat-icon>
@@ -100,25 +103,13 @@
       mat-icon-button
       class="text-light"
       matTooltip="Realizar un dibujo"
-      matTooltipPosition="right"
+      matTooltipPosition="below"
       matTooltipHideDelay="300"
-      matTooltipShowDelay="1000"
+      matTooltipShowDelay="2000"
       matTooltipClass="background-tooltip"
       (click)="clickDraw.emit(true)"
     >
       <mat-icon>edit</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      class="text-light"
-      matTooltip="Hacer un comentario"
-      matTooltipPosition="right"
-      matTooltipHideDelay="300"
-      matTooltipShowDelay="1000"
-      matTooltipClass="background-tooltip"
-      (click)="clickComment.emit(true)"
-    >
-      <mat-icon>comment</mat-icon>
     </button>
   </div>
 </div>

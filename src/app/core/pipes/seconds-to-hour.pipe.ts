@@ -5,7 +5,7 @@ import { secondsToHourFormat } from '../services/functions.service';
   name: 'secondsToHour',
 })
 export class SecondsToHourPipe implements PipeTransform {
-  transform(seconds: number): string {
-    return seconds ? secondsToHourFormat(seconds) : '00:00:00:000';
+  transform(seconds: number, maxValue?: number): string {
+    return secondsToHourFormat(seconds, maxValue);
   }
 }

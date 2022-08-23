@@ -10,6 +10,7 @@ import { PrivateRoutingModule } from './private-routing.module';
 import { CommentsViewerComponent } from './components/comments-viewer/comments-viewer.component';
 import { CanvasDrawComponent } from './components/canvas-draw/canvas-draw.component';
 import { VideoControlsComponent } from './components/video-controls/video-controls.component';
+import { ReproductionTimeLineComponent } from './components/reproduction-time-line/reproduction-time-line.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { VideoControlsComponent } from './components/video-controls/video-contro
     CommentsViewerComponent,
     CanvasDrawComponent,
     VideoControlsComponent,
+    ReproductionTimeLineComponent,
   ],
   imports: [CommonModule, PrivateRoutingModule, SharedModule],
 })

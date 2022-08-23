@@ -8,7 +8,7 @@
 @import "./assets/scss/own-classes";
 
 * {
-  font-size: 16px;
+  font-size: 14px;
 }
 html,
 body {
@@ -17,12 +17,9 @@ body {
 body {
   margin: 0;
   font-family: Poppins, "Helvetica Neue", sans-serif;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  max-width: 100vw;
-  overflow-x: hidden;
+  overflow: hidden;
+  position: relative;
+  min-height: 100vh;
 
   a {
     text-decoration: none;

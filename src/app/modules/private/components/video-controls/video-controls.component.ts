@@ -17,18 +17,26 @@ import {
 export class VideoControlsComponent
   implements OnInit, OnChanges, AfterViewInit
 {
-  @Output() clickDraw = new EventEmitter<boolean>();
-  @Output() clickComment = new EventEmitter<boolean>();
   @Input() video!: HTMLVideoElement;
+  @Output() clickDraw = new EventEmitter<boolean>();
+
   currentTime!: number;
-  constructor() {}
+  dblclick: boolean = false;
+  constructor() {
+    setTimeout(() => {
+      if (this.video == null) {
+        this.video = document.querySelector('.video')!;
+      }
+      this.video.onclick = this.playVideo;
+      this.setCurrentTimeInterval();
+    }, 1000);
+  }
 
   ngOnInit(): void {}
+
   ngOnChanges(changes: SimpleChanges): void {}
-  ngAfterViewInit(): void {
-    this.setCurrentTimeInterval();
-    console.log(this.currentTimePercent);
-  }
+
+  ngAfterViewInit(): void {}
   get currentTimePercent() {
     return this.video ? (this.currentTime * 100) / this.video.duration : 0;
   }
@@ -36,9 +44,41 @@ export class VideoControlsComponent
   set currentTimePercent(value) {
     this.video.currentTime = (value * this.video.duration) / 100;
   }
+
   setCurrentTimeInterval() {
     setInterval(() => {
       this.currentTime = this.video ? this.video.currentTime : 0;
-    }, 1);
+    }, 100);
+  }
+
+  fastForwardVideo(adelantar: boolean) {
+    const value = this.isPaused ? 0.01 : 1;
+    this.video.currentTime += adelantar ? value : -value;
+  }
+
+  playVideo(event) {
+    if (event) {
+      event.target.paused ? event.target.play() : event.target.pause();
+    } else {
+      this.video.paused ? this.video.play() : this.video.pause();
+    }
+  }
+
+  get isMuted() {
+    return this.video && this.video.muted;
+  }
+
+  get isPaused() {
+    return this.video && this.video.paused;
+  }
+
+  setMuted() {
+    this.video ? (this.video.muted = !this.video.muted) : '';
+  }
+
+  setPaused() {
+    if (this.video) {
+      this.video.paused ? this.video.play() : this.video.pause();
+    }
   }
 }
