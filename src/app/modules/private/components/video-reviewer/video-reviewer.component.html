@@ -1,6 +1,6 @@
 <div class="container-fluid">
-  <div class="row h-100">
-    <div class="col-9">
+  <div class="row">
+    <div class="col-9 p-0">
       <video
         #videoRef
         src="assets/camilo-por-primera-vez.mp4"
@@ -9,58 +9,32 @@
         title="Video"
       ></video>
 
-      <div class="video-controls" *ngIf="isLoadedVideo()">
-        <app-video-controls [video]="video"></app-video-controls>
-        <div>
-          <span>
-            {{ video.currentTime ? video.currentTime : "00:00:00:00" }}
-          </span>
-          <span class="text-muted">
-            {{ video.duration ? video.duration : "00:00:00:00" }}</span
-          >
-        </div>
-        <button
-          mat-icon-button
-          matTooltip="Reproduce el video"
-          matTooltipPosition="right"
-          matTooltipHideDelay="500"
-          matTooltipClass="background-tooltip"
-          class="text-light"
-          (click)="takeVideoFrame()"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-      </div>
+      <app-video-controls
+        *ngIf="isLoadedVideo()"
+        [video]="video"
+        (clickDraw)="takeVideoFrame()"
+      ></app-video-controls>
     </div>
-    <div class="col-3">
+    <div class="col-3 p-0">
       <app-comments-viewer></app-comments-viewer>
     </div>
   </div>
 
-  <div class="contenedor-flotante">
-    <div class="image-container" style="z-index: 2">
-      <button
-        mat-icon-button
-        class="bg-white m-4"
-        (click)="setVisibleFrame(false)"
-      >
-        <mat-icon>close</mat-icon>
-      </button>
-    </div>
-
-    <div
-      class="draw-container"
-      style="
-        z-index: 3;
-        pointer-events: none;
-        width: 90%;
-        max-height: 90vh !important;
-      "
+  <div class="contenedor-flotante row">
+    <button
+      mat-icon-button
+      cdkDrag
+      class="button-close bg-primary m-4"
+      (dblclick)="setVisibleFrame(false)"
     >
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="draw-container" style="">
       <img
         alt="taken-image"
         class="img-fluid taken-image"
-        width="100%"
+        src="assets/imagen-ejemplo.png"
         #image
       />
 

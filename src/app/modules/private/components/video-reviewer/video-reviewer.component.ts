@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { of, Subject } from 'rxjs';
 
 import {
   base64ToFile,
@@ -22,12 +23,14 @@ export class VideoReviewerComponent implements OnInit, AfterViewInit {
   video!: HTMLVideoElement;
   resetOnChange!: number;
   afterViewInit: boolean = false;
+  currentTime!: number;
   constructor() {}
 
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.render();
+    // this.takeVideoFrame();
   }
 
   /**
@@ -57,38 +60,25 @@ export class VideoReviewerComponent implements OnInit, AfterViewInit {
    * @param visible true para mostrar
    */
   public async setVisibleFrame(visible: boolean) {
-    const imageContainer: HTMLDivElement =
-      document.querySelector('.image-container')!;
-    const drawContainer: HTMLImageElement =
-      document.querySelector('.draw-container')!;
+    const contenedorFlotante: HTMLDivElement = document.querySelector(
+      '.contenedor-flotante'
+    )!;
 
-    const containerDnone = imageContainer.classList.contains('d-none');
-    const drawDnone = drawContainer.classList.contains('d-none');
-    if (visible) {
-      if (containerDnone) {
-        imageContainer.classList.remove('d-none');
-        imageContainer.classList.add('d-flex');
-      }
-      if (drawDnone) {
-        drawContainer.classList.remove('d-none');
-        drawContainer.classList.add('d-flex');
-      }
-    } else {
+    const containerDnone = contenedorFlotante.classList.contains('d-none');
+    if (visible && containerDnone) {
+      contenedorFlotante.classList.remove('d-none');
+      contenedorFlotante.classList.add('d-flex');
+    } else if (!containerDnone) {
       await this.takeDrawedImage();
-      if (!containerDnone) {
-        imageContainer.classList.add('d-none');
-        imageContainer.classList.remove('d-flex');
-      }
-      if (!drawDnone) {
-        drawContainer.classList.add('d-none');
-        drawContainer.classList.remove('d-flex');
-      }
+      contenedorFlotante.classList.add('d-none');
+      contenedorFlotante.classList.remove('d-flex');
     }
     this.reset;
   }
 
   render() {
     this.video = this.videoRef.nativeElement;
+    this.setCurrentTimeInterval();
     this.afterViewInit = true;
   }
 
@@ -97,6 +87,12 @@ export class VideoReviewerComponent implements OnInit, AfterViewInit {
   }
 
   isLoadedVideo() {
-    return this.afterViewInit && this.video;
+    return this.afterViewInit && this.video ? true : false;
+  }
+
+  setCurrentTimeInterval() {
+    setInterval(() => {
+      this.currentTime = this.video.currentTime;
+    }, 1);
   }
 }

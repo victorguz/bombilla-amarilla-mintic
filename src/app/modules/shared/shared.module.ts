@@ -18,9 +18,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
+import { MatSliderModule } from '@angular/material/slider';
+import { SecondsToHourPipe } from '../../core/pipes/seconds-to-hour.pipe';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 @NgModule({
-  declarations: [],
+  declarations: [SecondsToHourPipe],
   imports: [
     CommonModule,
     FormsModule,
@@ -44,13 +46,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSnackBarModule,
     MatDialogModule,
     MatTooltipModule,
+    MatSliderModule,
+    DragDropModule,
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    //Aurora
+    SecondsToHourPipe,
     //Material
     MatTableModule,
     MatPaginatorModule,
@@ -69,6 +73,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSnackBarModule,
     MatDialogModule,
     MatTooltipModule,
+    MatSliderModule,
+    DragDropModule,
   ],
   providers: [],
 })

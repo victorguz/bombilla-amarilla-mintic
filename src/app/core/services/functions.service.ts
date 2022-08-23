@@ -285,19 +285,26 @@ export function createImageFromHTML(
   return html2canvas(element);
 }
 
-export function secondsToHourFormat(sec_num: number) {
+export function secondsToHourFormat(
+  sec_num: number,
+  includeMilis: boolean = false
+) {
   let hours: any = Math.floor(sec_num / 3600);
   let minutes: any = Math.floor((sec_num - hours * 3600) / 60);
   let seconds: any = sec_num - hours * 3600 - minutes * 60;
+  let miliseconds: any = Math.round((seconds - Math.floor(seconds)) * 1000);
 
-  if (hours < 10) {
-    hours = '0' + hours;
-  }
-  if (minutes < 10) {
-    minutes = '0' + minutes;
-  }
-  if (seconds < 10) {
-    seconds = '0' + seconds;
-  }
-  return hours + ':' + minutes + ':' + seconds;
+  const formatNumber = (n: number) => {
+    return n < 10 ? '0' + n : n;
+  };
+
+  return (
+    formatNumber(hours) +
+    ':' +
+    formatNumber(minutes) +
+    ':' +
+    formatNumber(Math.floor(seconds)) +
+    ':' +
+    formatNumber(miliseconds)
+  );
 }

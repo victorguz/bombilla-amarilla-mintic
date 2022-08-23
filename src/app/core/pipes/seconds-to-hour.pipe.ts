@@ -6,6 +6,6 @@ import { secondsToHourFormat } from '../services/functions.service';
 })
 export class SecondsToHourPipe implements PipeTransform {
   transform(seconds: number): string {
-    return seconds ? secondsToHourFormat(seconds) : '00:00:00';
+    return seconds ? secondsToHourFormat(seconds) : '00:00:00:000';
   }
 }
