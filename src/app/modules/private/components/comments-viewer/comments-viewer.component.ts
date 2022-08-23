@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   createImageFromHTML,
@@ -9,15 +15,15 @@ import {
   AttachedInterface,
   CommentInterface,
 } from '../../../../interfaces/comment.interface';
-import { setVisibleFrame } from '../function';
+import { addImage, setVisibleFrame } from '../function';
 
 @Component({
   selector: 'app-comments-viewer',
   templateUrl: './comments-viewer.component.html',
   styleUrls: ['./comments-viewer.component.scss'],
 })
-export class CommentsViewerComponent implements OnInit {
-  @Input() imageId!: number;
+export class CommentsViewerComponent implements OnInit, OnChanges {
+  @Input() currentImage: AttachedInterface | null = null;
   video!: HTMLVideoElement;
 
   form = new FormGroup({
@@ -35,6 +41,7 @@ export class CommentsViewerComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+  ngOnChanges(changes: SimpleChanges): void {}
 
   getComments() {
     this.comments = getFromLocal('comments');
@@ -42,13 +49,19 @@ export class CommentsViewerComponent implements OnInit {
 
   addComment() {
     if (this.form.get('comment')?.valid) {
+      const image =
+        this.currentImage && this.currentImage.base64
+          ? addImage(this.currentImage.base64)
+          : null;
       pushToLocalArray('comments', {
-        attachedId: this.imageId,
+        attachedId: image ? image.id : 0,
         content: this.form.get('comment')?.value,
         currentTime: this.video.currentTime,
         documentId: 0,
         user: 'Andrea Cassiani',
       } as CommentInterface);
+      this.currentImage = null;
+      this.form.get('comment')?.setValue('');
       this.getComments();
     }
   }
@@ -59,9 +72,19 @@ export class CommentsViewerComponent implements OnInit {
     }
   }
 
-  async showImage(attachedId) {
+  async showImage(attachedId?: number, base64?: string) {
     const images: AttachedInterface[] = getFromLocal('images');
     const attached = images.find((element) => element.id == attachedId);
-    setVisibleFrame(true, attached?.base64);
+    setVisibleFrame(true, base64 ? base64 : attached?.base64);
+  }
+
+  setCurrentTime(currentTime) {
+    this.video.currentTime = currentTime;
+  }
+
+  borrarImagen(event) {
+    if (event.which == 8 || event.key.toLowerCase() == 'backspace') {
+      this.currentImage = null;
+    }
   }
 }

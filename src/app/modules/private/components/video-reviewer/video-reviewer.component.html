@@ -12,34 +12,35 @@
     ></app-video-controls>
   </div>
   <div class="comentarios">
-    <app-comments-viewer></app-comments-viewer>
+    <app-comments-viewer [currentImage]="currentImage"></app-comments-viewer>
   </div>
 
   <div class="contenedor-flotante row d-none">
     <button
-      cdkDrag
       mat-icon-button
       class="button-close bg-primary m-4 shadow"
-      (dblclick)="setVisibleFrameVoid(false)"
+      (click)="setVisibleFrameVoid(false)"
     >
       <mat-icon>close</mat-icon>
     </button>
 
     <div class="draw-container">
-      <img
-        alt="taken-image"
-        class="img-fluid taken-image"
-        src="assets/imagen-ejemplo.png"
-        #image
-      />
+      <div class="content">
+        <img
+          alt="taken-image"
+          class="img-fluid taken-image"
+          src="assets/imagen-ejemplo.png"
+          #image
+        />
 
-      <section class="drawer centered">
-        <app-canvas-draw
-          [width]="image.width"
-          [height]="image.height"
-          [resetOnChange]="resetOnChange"
-        ></app-canvas-draw>
-      </section>
+        <section class="drawer centered">
+          <app-canvas-draw
+            [width]="image.width"
+            [height]="image.height"
+            [resetOnChange]="resetOnChange"
+          ></app-canvas-draw>
+        </section>
+      </div>
     </div>
   </div>
 </div>

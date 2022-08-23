@@ -1,6 +1,8 @@
 import {
   createImageFromHTML,
+  hideLoadingSpinner,
   pushToLocalArray,
+  showLoadingSpinner,
 } from '../../../core/services/functions.service';
 import { AttachedInterface } from '../../../interfaces/comment.interface';
 
@@ -8,7 +10,12 @@ import { AttachedInterface } from '../../../interfaces/comment.interface';
  * Toma una captura de la imagen incluyendo el dibujo hecho sobre ella
  */
 export async function takeDrawedImage() {
-  return createImageFromHTML(document.querySelector('.draw-container')!);
+  showLoadingSpinner();
+  const result = createImageFromHTML(
+    document.querySelector('.draw-container .content')!
+  );
+  hideLoadingSpinner();
+  return result;
 }
 
 /**
@@ -19,8 +26,11 @@ export function setVisibleFrame(setVisible: boolean, base64?: string) {
   const contenedorFlotante: HTMLDivElement = document.querySelector(
     '.contenedor-flotante'
   )!;
-  const image: HTMLImageElement = document.querySelector('.taken-image')!;
-  image.src = base64 ? base64 : '';
+
+  if (base64) {
+    const image: HTMLImageElement = document.querySelector('.taken-image')!;
+    image.src = base64;
+  }
 
   if (setVisible) {
     contenedorFlotante.classList.remove('d-none');

@@ -6,13 +6,13 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { of, Subject } from 'rxjs';
 
 import {
-  base64ToFile,
   createImageFromHTML,
-  secondsToHourFormat,
+  hideLoadingSpinner,
+  showLoadingSpinner,
 } from '../../../../core/services/functions.service';
+import { AttachedInterface } from '../../../../interfaces/comment.interface';
 import { addImage, setVisibleFrame, takeDrawedImage } from '../function';
 
 @Component({
@@ -28,6 +28,7 @@ export class VideoReviewerComponent
   resetOnChange!: number;
   afterViewInit: boolean = false;
   currentTime!: number;
+  currentImage!: AttachedInterface;
   constructor() {}
 
   ngOnInit(): void {}
@@ -65,9 +66,11 @@ export class VideoReviewerComponent
    */
   public async setVisibleFrameVoid(setVisible: boolean, base64?: string) {
     if (!setVisible) {
-      takeDrawedImage();
+      let canvas = await takeDrawedImage();
+      this.currentImage = { base64: canvas.toDataURL(), id: 0 };
     }
-    setVisibleFrame(setVisible,base64);
+
+    setVisibleFrame(setVisible, base64);
     this.reset();
   }
 

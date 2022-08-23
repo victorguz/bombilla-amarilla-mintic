@@ -66,21 +66,22 @@
     }
 
     .draw-container {
-      background-color: #00000073;
-      // width: ;
       display: flex;
       align-items: center;
       justify-content: center;
 
       height: 100%;
       width: 100%;
-      // padding: 3rem;
-      // max-height: 95vh !important;
-      .taken-image {
-        object-fit: cover;
-        // width: 90%;
+
+      background-color: #000000d5;
+
+      .content {
         height: 90%;
-        // max-height: 50vh;
+
+        .taken-image {
+          object-fit: cover;
+          height: 100%;
+        }
       }
     }
   }

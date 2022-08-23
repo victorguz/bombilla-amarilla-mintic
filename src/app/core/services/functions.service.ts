@@ -292,10 +292,14 @@ export async function base64ToFile(loadedFile: Base64File | string) {
 export function createImageFromHTML(
   element: HTMLElement
 ): Promise<HTMLCanvasElement> {
-  return html2canvas(element);
+  showLoadingSpinner();
+  const result = html2canvas(element);
+  hideLoadingSpinner();
+  return result;
 }
 
 export function secondsToHourFormat(sec_num: number, maxValue?: number) {
+  showLoadingSpinner();
   let result = '';
   sec_num = sec_num ? sec_num : 0;
   let hours: any = Math.floor(sec_num / 3600);
@@ -326,5 +330,6 @@ export function secondsToHourFormat(sec_num: number, maxValue?: number) {
       ':' +
       formatNumber(miliseconds);
   }
+  hideLoadingSpinner();
   return result;
 }

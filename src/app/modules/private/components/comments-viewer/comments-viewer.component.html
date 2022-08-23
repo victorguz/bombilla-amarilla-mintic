@@ -13,12 +13,16 @@
             <strong>{{ item.user }}</strong>
           </div>
           <mat-icon
+            class="cursor-pointer"
             (click)="showImage(item.attachedId)"
             *ngIf="item.attachedId > 0"
             >image</mat-icon
           >
         </div>
-        <small class="naranja cursor-pointer text-decoration-underline">
+        <small
+          class="naranja cursor-pointer text-decoration-underline"
+          (click)="setCurrentTime(item.currentTime)"
+        >
           {{
             item.currentTime
               | secondsToHour: (video ? video.duration : undefined)
@@ -35,14 +39,26 @@
     <form
       [formGroup]="form"
       (ngSubmit)="addComment()"
-      class="d-flex align-items-center justify-content-center"
+      class="d-flex align-items-center justify-content-center position-relative"
     >
+      <button
+        class="btn btn-primary btn-sm btn-badge"
+        *ngIf="currentImage && currentImage.base64"
+      >
+        <mat-icon
+          class="cursor-pointer"
+          (click)="showImage(undefined, currentImage.base64)"
+          >image</mat-icon
+        >
+      </button>
       <input
         type="text"
         class="form-control bg-light bg-opacity-10 border-0 text-light"
         placeholder="Realizar un comentario..."
         formControlName="comment"
+        [ngClass]="{ 'with-badge': currentImage && currentImage.base64 }"
         (focus)="setPaused()"
+        (keyup)="borrarImagen($event)"
       />
       <button mat-icon-button class="text-light" type="submit">
         <mat-icon>send</mat-icon>
