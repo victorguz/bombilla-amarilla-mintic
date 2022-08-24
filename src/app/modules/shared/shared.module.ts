@@ -21,6 +21,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSliderModule } from '@angular/material/slider';
 import { SecondsToHourPipe } from '../../core/pipes/seconds-to-hour.pipe';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { RequestsService } from '../../core/services/requests.service';
 @NgModule({
   declarations: [SecondsToHourPipe],
   imports: [
@@ -76,6 +77,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatSliderModule,
     DragDropModule,
   ],
-  providers: [],
+  providers: [RequestsService],
 })
 export class SharedModule {}
