@@ -5,7 +5,7 @@ import { PublicComponent } from './modules/public/components/layout/public.compo
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'private',
     component: PrivateComponent,
     loadChildren: () =>
       import('./modules/private/private.module').then((m) => m.PrivateModule),
@@ -16,6 +16,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/public/public.module').then((m) => m.PublicModule),
   },
+  {
+    path:'**',
+    redirectTo:'public/login',
+    pathMatch: 'prefix'
+  }
 ];
 
 @NgModule({
