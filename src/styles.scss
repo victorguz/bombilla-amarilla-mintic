@@ -8,13 +8,16 @@
 @import "./assets/scss/own-classes";
 
 * {
-  font-size: 14px;
+  font-size: 16px;
   font-family: "Roboto", "Arial", "Sans Serif";
+  font-weight: 500;
 }
+
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Poppins, "Helvetica Neue", sans-serif;
