@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PublicRoutingModule } from './public-routing.module';
-import { PublicComponent } from './public.component';
+import { LoginComponent } from './page/login/login.component';
+import { PublicComponent } from './components/layout/public.component';
 
 
 @NgModule({
   declarations: [
-    PublicComponent
+    PublicComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,

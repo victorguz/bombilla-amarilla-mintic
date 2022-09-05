@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PrivateComponent } from './modules/private/components/layout/private/private.component';
+import { PublicComponent } from './modules/public/components/layout/public.component';
 
 const routes: Routes = [
   {
@@ -9,7 +10,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/private/private.module').then((m) => m.PrivateModule),
   },
-  { path: 'public', loadChildren: () => import('./modules/public/public.module').then(m => m.PublicModule) },
+  {
+    path: 'public',
+    component: PublicComponent,
+    loadChildren: () =>
+      import('./modules/public/public.module').then((m) => m.PublicModule),
+  },
 ];
 
 @NgModule({
