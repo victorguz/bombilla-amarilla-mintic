@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { getToken } from './functions.service';
-import { BasicResponse } from '../models/basic-response.model';
 import { isEmpty, isNotEmptyObject, isObject, isURL } from 'class-validator';
-import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { ContentType, RequestMethod } from '../constants.config';
-import { HttpBody } from '../../shared/interfaces/shared.interfaces';
+import { HttpBody } from '../../interfaces/shared.interfaces';
+import { BasicResponse } from '../../interfaces/basic-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,11 +13,7 @@ export class RequestsService {
   constructor(private http: HttpClient) {}
 
   private isAllowedDomain(domain: string, headers: any = undefined) {
-    const allowedDomain = environment.allowedDomains.find((dom) => {
-      return domain.includes(dom) || dom.includes(domain);
-    });
     headers = isObject(headers) && isNotEmptyObject(headers) ? headers : {};
-    allowedDomain ? (headers['Authorization'] = 'Bearer ' + getToken()) : {};
     return headers;
   }
 
@@ -115,5 +109,3 @@ export class RequestsService {
     }
   }
 }
-
-

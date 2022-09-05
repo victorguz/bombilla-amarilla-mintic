@@ -8,9 +8,11 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "start:dev": "ng serve --configuration development",
-    "start:prod": "ng serve --configuration production",
+    "start:qa": "ng serve --configuration qa",
+    "start:prd": "ng serve --configuration production",
     "build:dev": "ng build --configuration development --aot",
-    "build:prod": "ng build --configuration production --aot"
+    "build:qa": "ng build --configuration qa --aot",
+    "build:prd": "ng build --configuration production --aot"
   },
   "private": true,
   "dependencies": {

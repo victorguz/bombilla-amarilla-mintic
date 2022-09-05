@@ -7,11 +7,8 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import {
-  createImageFromHTML,
-  hideLoadingSpinner,
-  showLoadingSpinner,
-} from '../../../../core/services/functions.service';
+import { createImageFromHTML } from '../../../../core/services/functions.service';
+import { RequestsService } from '../../../../core/services/requests.service';
 import { AttachedInterface } from '../../../../interfaces/comment.interface';
 import { addImage, setVisibleFrame, takeDrawedImage } from '../function';
 
@@ -29,13 +26,22 @@ export class VideoReviewerComponent
   afterViewInit: boolean = false;
   currentTime!: number;
   currentImage!: AttachedInterface;
-  constructor() {}
+  videoUrl!: string;
+  constructor(private requestService: RequestsService) {}
 
-  ngOnInit(): void {}
+  async ngOnInit() {
+    this.requestService
+      .get({ url: '/assets/base64.json' })
+      .subscribe((result: any) => {
+        console.log(result);
+        this.videoUrl = 'data:video/mp4;base64,' + result.base64;
+      });
+  }
 
   ngAfterViewInit(): void {
     this.video = this.videoRef.nativeElement;
   }
+
   ngAfterContentChecked(): void {
     this.afterViewInit = true;
   }

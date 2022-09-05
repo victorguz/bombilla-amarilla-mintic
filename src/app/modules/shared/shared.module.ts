@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
@@ -21,8 +21,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSliderModule } from '@angular/material/slider';
 import { SecondsToHourPipe } from '../../core/pipes/seconds-to-hour.pipe';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { RequestsService } from '../../core/services/requests.service';
+import { NotificationService } from '../../core/services/notification.service';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 @NgModule({
-  declarations: [SecondsToHourPipe],
+  declarations: [SecondsToHourPipe, DialogComponent, SpinnerComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -55,6 +59,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ReactiveFormsModule,
     HttpClientModule,
     SecondsToHourPipe,
+    SpinnerComponent,
+    DialogComponent,
     //Material
     MatTableModule,
     MatPaginatorModule,
@@ -76,6 +82,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatSliderModule,
     DragDropModule,
   ],
-  providers: [],
+  providers: [RequestsService, NotificationService],
 })
 export class SharedModule {}

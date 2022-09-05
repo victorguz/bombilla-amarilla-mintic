@@ -6,11 +6,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import {
-  createImageFromHTML,
-  getFromLocal,
-  pushToLocalArray,
-} from '../../../../core/services/functions.service';
+import { getFromLocal, pushToLocalArray } from '../../../../core/services/functions.service';
 import {
   AttachedInterface,
   CommentInterface,
@@ -74,8 +70,13 @@ export class CommentsViewerComponent implements OnInit, OnChanges {
 
   async showImage(attachedId?: number, base64?: string) {
     const images: AttachedInterface[] = getFromLocal('images');
-    const attached = images.find((element) => element.id == attachedId);
-    setVisibleFrame(true, base64 ? base64 : attached?.base64);
+    const attached = images
+      ? images.find((element) => element.id == attachedId)
+      : undefined;
+    setVisibleFrame(
+      base64 || (attached && attached?.base64) ? true : false,
+      base64 ? base64 : attached ? attached?.base64 : undefined
+    );
   }
 
   setCurrentTime(currentTime) {

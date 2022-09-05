@@ -1,8 +1,9 @@
 <div class="review-container">
-  <div class="video-container">
+  <div class="video-container overflow-hidden">
     <video
       #videoRef
-      src="assets/camilo-por-primera-vez.mp4"
+      crossorigin="anonymous"
+      [src]="videoUrl"
       [controls]="false"
       class="video img-fluid"
     ></video>

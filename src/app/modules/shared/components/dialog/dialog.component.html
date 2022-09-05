@@ -1,23 +1,33 @@
-<article class="card">
-  <section class="icon">
-    <div class="back text-{{ color }}">
-      <mat-icon *ngIf="this.icon" class="material-icons-round">{{
-        icon
-      }}</mat-icon>
-    </div>
-  </section>
-  <section [innerHTML]="data.options.text" class="card-body pt-1"></section>
-  <section class="card-footer">
-    <button mat-button (click)="onCancelClick()">
-      {{ data.options.cancelButton }}
+<article
+  class="dialog d-flex flex-column align-items-center p-4 position-relative"
+>
+  <div
+    class="d-flex justify-content-end w-100"
+    *ngIf="data.type == 'confirmation'"
+  >
+    <button class="btn btn-close btn-dark" (click)="onCancel()"></button>
+  </div>
+  <h3 class="fw-bolder text-primary" [innerHTML]="data.options.title"></h3>
+
+  <p class="body pt-1">
+    {{ data.options.message }}
+  </p>
+  <section class="footer d-flex align-items-center gap-3">
+    <button
+      mat-button
+      class="btn btn-outline-dark"
+      (click)="onCancel()"
+      *ngIf="data.type == 'confirmation'"
+    >
+      {{ data.options.cancelText || "Cancelar" }}
     </button>
     <button
-      mat-flat-button
-      (click)="onOkClick()"
-      class="btn btn-{{ color }}"
+      mat-button
+      class="btn btn-secondary"
+      (click)="onOk()"
       cdkFocusInitial
     >
-      {{ data.options.okButton }}
+      {{ data.options.okText || "Aceptar" }}
     </button>
   </section>
 </article>
