@@ -7,11 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import {
-  createImageFromHTML,
-  hideLoadingSpinner,
-  showLoadingSpinner,
-} from '../../../../core/services/functions.service';
+import { createImageFromHTML } from '../../../../core/services/functions.service';
 import { RequestsService } from '../../../../core/services/requests.service';
 import { AttachedInterface } from '../../../../interfaces/comment.interface';
 import { addImage, setVisibleFrame, takeDrawedImage } from '../function';
@@ -45,6 +41,7 @@ export class VideoReviewerComponent
   ngAfterViewInit(): void {
     this.video = this.videoRef.nativeElement;
   }
+
   ngAfterContentChecked(): void {
     this.afterViewInit = true;
   }
