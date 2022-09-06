@@ -9,18 +9,20 @@ export interface Base64File {
   url?: string | SafeUrl;
 }
 
-export enum ModalServiceType {
-  SUCCESS = 'SUCCESS',
-  WARNING = 'WARNING',
-  DANGER = 'DANGER',
-  INFO = 'INFO',
+export interface ModalOptions {
+  message: string;
+  title?: string;
+  image?: string;
+  cancelText?: string;
+  okText?: string;
+  icon?: string;
 }
 
-export interface ModalServiceOption {
-  text: string;
-  okButton?: string;
-  cancelButton?: string;
-  time?: number;
+export interface SpinnerMessageOptions {
+  message: string;
+  title?: string;
+  timeoutMillis?: number;
+  icon?: string;
 }
 
 export interface HttpBody {

@@ -1,5 +1,5 @@
-$primary: #F1D103;
-$secondary: #dadadad8;
+$primary: #f1d103;
+$secondary: #ff4c00;
 $success: #2dce89;
 $info: #11cdef;
 $warning: #ffc107;
@@ -14,7 +14,7 @@ $default-radius: 20px;
 :root {
   --default-radius: 20px;
   --button-shadow: 14px 13px 27px 0px #00000040 !important;
-  --button-radius: 50px;
+  --button-radius: 10px;
   --dark-gray: #3d3d3d;
   --yellow-primary:$primary;
 }

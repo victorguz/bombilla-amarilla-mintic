@@ -4,3 +4,11 @@
   margin: 0 !important;
   padding: 0 !important;
 }
+
+.btn {
+  box-shadow: none !important;
+  border-radius: var(--button-radius) !important;
+  &.btn-secondary {
+    color: white;
+  }
+}

@@ -6,7 +6,7 @@ import {
   ignoreSpecialCharacters,
   toTitleCase,
 } from './functions.service';
-import { ModalService } from './modal.service';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class HelpersService {
   constructor(
     private title: Title,
     private meta: Meta,
-    public notifications: ModalService
+    public notifications: NotificationService
   ) {}
   /**
    * Set a new page meta title
