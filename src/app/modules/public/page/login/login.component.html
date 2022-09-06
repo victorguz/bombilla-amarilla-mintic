@@ -1,6 +1,7 @@
 <div>
   <div class="row height">
     <div class="col col-lg-6 align-self-center" style="margin-bottom: 50px">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <h1 class="title-login">Gestor de Proyectos Bombillo Amarillo</h1>
       <h4 class="title-description">
         ¡Inicia sesión y accede a tu gestor de proyectos!
@@ -14,6 +15,8 @@
           class="form-control input"
           id="emailFormControlInput"
           placeholder="Ingresa tu correo electrónico"
+          formControlName="usuario"
+          [ngClass]="{'is-invalid':submitted && loginForm['usuario'].controls.errors}"
         />
       </div>
       <div class="lg-6 password-spacer">
@@ -37,6 +40,7 @@
         <h6 class="text-forget-password"><a>¿Olvidaste tu contraseña?</a></h6>
         <div></div>
       </div>
+    </form>
     </div>
     <div class="col col-lg-6 background-bombillo d-flex justify-content-end">
         <div><img class="bombillo-logo" src="../../../../../assets/images/LOGOBOMBILLO1-02.png" alt="Logo Bombillo Amarillo"></div>
