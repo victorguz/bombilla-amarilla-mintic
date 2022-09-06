@@ -1,0 +1,111 @@
+@import "../../../../../assets/scss/variables";
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+.height {
+  height: 100vh;
+}
+
+.title-login {
+  font-size: 3rem;
+  font-weight: 900;
+  color: $primary;
+  margin-left: 18%;
+  margin-right: 18%;
+  margin-bottom: 4.1%;
+  text-align: center;
+}
+
+.title-description {
+  font-weight: 400;
+  color: black;
+  text-align: center;
+  margin-left: 33.3%;
+  margin-right: 33.3%;
+  margin-top: 4.1%;
+  margin-bottom: 1.85%;
+}
+
+.label-bold {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.input {
+  font-size: 1.5rem;
+  height: 3.2%;
+  border-radius: 8px;
+  border: 2px solid #1b1b1b;
+}
+.input::placeholder {
+  font-size: 1.5rem;
+}
+
+.email-spacer {
+  margin-top: 1.85%;
+  margin-left: 16.6%;
+  margin-right: 16.6%;
+  margin-bottom: 1.6%;
+}
+
+.password-spacer {
+  margin-top: 1.6%;
+  margin-left: 16.6%;
+  margin-right: 16.6%;
+  margin-bottom: 2.5%;
+}
+
+.bottom-position {
+  display: flex;
+  justify-content: center;
+}
+
+.bottom-size {
+  font-family: 'Acme', sans-serif;
+  font-size: 1.5rem;
+  width: 33.3%;
+  height: 50px;
+  font-weight: 400;
+  margin-top: 2.5%;
+  background-color: #ff4c00;
+  color: #fbfbfb;
+  border-radius: 18px;
+  
+
+}
+
+.text-forget-password {
+  text-align: center;
+  margin-top: 2%;
+  margin-left: 33.3%;
+  margin-right: 33.3%;
+  a {
+    font-size: 1.5rem;
+    text-decoration: underline;
+    color: $primary;
+  }
+}
+
+.square {
+  position: absolute;
+  top: calc(100% - 250px);
+  left: 0px;
+  width: 0;
+  height: 0;
+  border-right: 250px solid transparent;
+  border-top: 250px solid transparent;
+  border-left: 250px solid $primary;
+  border-bottom: 250px solid $primary;
+  /* UI Properties */
+
+  box-shadow: inset 0px 3px 6px #00000029;
+  opacity: 1;
+}
+
+.background-bombillo{
+    background-image:url('../../../../../assets/images/AFICHE_2.png');
+    background-size:cover;
+}
+
+.bombillo-logo{
+    height: 300px;
+    width: auto;
+}
